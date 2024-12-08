@@ -1,10 +1,12 @@
 function tsp_ls(distance_matrix) {
+
+    var n = distance_matrix.length
     //base case where there is only one or less than one city present, it returns 0
-    if (!distance_matrix || distance_matrix.length === 0) {
+    if (!distance_matrix || n === 0) {
         return 0; 
     }
-    
-    if (distance_matrix.length === 1) {
+
+    if (n === 1) {
         return 0; 
     }
 
@@ -26,9 +28,9 @@ function tsp_ls(distance_matrix) {
       }
 
       // Generates a random route
-    function generateRandomRoute(distanceMatrix) {
+    function generateRandomRoute() {
         let route = [];
-        for (let i = 0; i < distanceMatrix.length; i++) {
+        for (let i = 0; i < n; i++) {
             route.push(i);
         }
 
@@ -49,10 +51,10 @@ function tsp_ls(distance_matrix) {
     const maxNoImprovement = 10; 
 
     while (noImprovementCount < maxNoImprovement) {
-        let i = Math.floor(Math.random() * (distance_matrix.length - 1)); // Randomly choose i
-        let k = Math.floor(Math.random() * (distance_matrix.length - 1)); // Randomly choose k, ensuring k > i
+        let i = Math.floor(Math.random() * (n - 1)); // Randomly choose i
+        let k = Math.floor(Math.random() * (n - 1)); // Randomly choose k, ensuring k > i
         while (k <= i) {
-        k = Math.floor(Math.random() * (distance_matrix.length - 1)); 
+        k = Math.floor(Math.random() * (n - 1)); 
         }
 
         let newRoute = twoOptSwap(currentRoute, i, k); // Perform 2-opt swap
