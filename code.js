@@ -14,7 +14,7 @@ function tsp_ls(distance_matrix) {
     const maxIterations = n * n;  // Limit iterations to prevent excessive runtime
     let iterations = 0;
     
-    // Stopping criterion: no improvement for a set number of iterations
+    // Loop runs for a fixed number of iterations defined by maxIterations
     while (iterations < maxIterations) {
         let i = Math.floor(Math.random() * (n - 1)); // Ensure i < n - 1
         let k = Math.floor(Math.random() * (n - i - 1)) + i + 1; // Ensure k > i
