@@ -13,7 +13,7 @@ function tsp_ls(distance_matrix) {
     }
 
 
-    let currentRoute = generateRandomRoute(); // Initialize with a random route
+    let currentRoute = generateRandomRoute(distance_matrix); // Initialize with a random route
     let bestRoute = currentRoute; // Track the best route
 
     // Stopping criterion where no improvement is seen for a set number of iterations
@@ -61,9 +61,9 @@ function calculateRouteLength(route, distance_matrix) {
 }
 
 // Generates a random route
-function generateRandomRoute() {
+function generateRandomRoute(distance_matrix) {
     let route = [];
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < distance_matrix.length; i++) {
         route.push(i);
     }
 
