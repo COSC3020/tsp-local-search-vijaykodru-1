@@ -19,10 +19,10 @@ function tsp_ls(distance_matrix) {
     }
 
     //calculates the route length in the given distanceMatrix
-    function calculateRouteLength(route, distanceMatrix) {
+    function calculateRouteLength(route) {
         let length = 0;
         for (let i = 0; i < route.length - 1; i++) {
-          length = length + distanceMatrix[route[i]][route[i + 1]];
+          length = length + distance_matrix[route[i]][route[i + 1]];
         }
         return length;
       }
