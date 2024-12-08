@@ -60,21 +60,21 @@ reasoning, to this markdown file.
 
 The worst case time complexity for the code I did is $O(n^3)$. This is because the outer loop runs a maximum of $n * n$ iterations and the calculateRoute is called in each iteration which takes about n time complexity. Together the total time complexity is $O(n^3)$
 
-The worst case memory complexity for the code implemented is $O(n)$. This is because bestroute, currentroute, newroute all are arrays of size n, which are stored until we find the best route. In total they add up to 3n. Asymptotically we ignore constants. So the total worst case memory complexity is $O(n)$ 
+The worst case memory complexity for the code implemented is $O(n)$. This is because bestroute, currentroute, newroute all are arrays of size n, which are stored until we find the best route. In total they add up to 3n. Asymptotically we ignore constants. So the total worst-case memory complexity is $O(n)$ 
 
 
 References Used:
 
-Pseudo code provided in the question was very helpful in getting started. I was able to figure most of the helper functions like genraterandom, calculateRoute, twooptswap. The main part of the code was also easy, however I struggled in handling the edge cases where the tests rans forever.
+Pseudocode provided in the question was very helpful in getting started. I was able to figure most of the helper functions like genraterandom, calculateRoute, twooptswap. The main part of the code was also easy, however I struggled in handling the edge cases where the tests ran forever.
 
-I looked at the following repo to get help with the edge cases:
+I looked at the following repo to get help with the edge cases: I used this repo to write my edge cases. In the repo the person tested for an empty graph, a  graph with one enter, and a graph with all zeroes.  I think that we do not need to do anything for graphs with all zeroes because this can be easily done by running the rest of the code. Whereas the empty graph or the graph with one entry would need to be checked before going through the code
 
 tsp-local-search-swilso59
 
-The following repo helped me handle the stopping criterion. I originally used having like a max iterations until no improvment found. But this made the test run forever. 
+The following repo helped me handle the stopping criterion. I originally used having max iterations until no improvement was found. But this made the test run forever. I used the idea of var numOfIterations=length*length from the below repository. I originally started by having the code run through only about 10 iterations instead of using the size of the matrix given. This leads the code to run forever for the values like a matrix that is only a 2 x 2 which should at most run for 4 iterations. My original code tried to run that for 10 iterations even though there was no need which took forever.
 
 tsp-local-search-ClaytonBrown4741
 
-I have also used ChatGPT to help me figure out where I messed up for some of the tries I did where i made a silly mistake calling the calculateRoute funtion without the distance_matrix being passed to it
+I have also used ChatGPT to help me figure out where I messed up for some of the tries I did where I made a silly mistake calling the calculateRoute function without the distance_matrix being passed to it
 
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice
