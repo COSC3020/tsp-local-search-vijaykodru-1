@@ -22,7 +22,7 @@ function tsp_ls(distance_matrix) {
     function calculateRouteLength(route, distanceMatrix) {
         let length = 0;
         for (let i = 0; i < route.length - 1; i++) {
-          length += distanceMatrix[route[i]][route[i + 1]];
+          length = length + distanceMatrix[route[i]][route[i + 1]];
         }
         return length;
       }
