@@ -10,6 +10,10 @@ function tsp_ls(distance_matrix) {
         return 0; 
     }
 
+    if (distance_matrix.every(row => row.every(val => val === 0))) {
+        return 0; 
+    }
+
     // function for swapping the elements between i and k in reverse order
     function twoOptSwap(route, i, k) {
         let newRoute = route.slice();
