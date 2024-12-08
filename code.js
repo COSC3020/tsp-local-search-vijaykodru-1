@@ -2,43 +2,41 @@ function tsp_ls(distance_matrix) {
     var n = distance_matrix.length;
 
     // Base case where there is only one or less than one city
-    if (n === 0) {
-        return 0; 
-    }
-    if (n === 1) {
-        return 0; 
-    }
-    if (distance_matrix.every(row => row.every(val => val === 0))) {
+    if (n === 0 || n === 1) {
         return 0; 
     }
 
     let currentRoute = generateRandomRoute(n); // Initialize with a random route
     let bestRoute = currentRoute; // Track the best route
+    let currentLength = calculateRouteLength(currentRoute, distance_matrix);
+    let bestLength = currentLength;
 
+    const maxIterations = n * n;  // Limit iterations to prevent excessive runtime
+    let iterations = 0;
+    
     // Stopping criterion: no improvement for a set number of iterations
-    let noImprovementCount = 0;
-    const maxNoImprovement = 10; 
-
-    while (noImprovementCount < maxNoImprovement) {
+    while (iterations < maxIterations) {
         let i = Math.floor(Math.random() * n); // Randomly choose i
-        let k = Math.floor(Math.random() * n); // Randomly choose k, ensuring k > i
-        while (k <= i) {
-            k = Math.floor(Math.random() * n); 
-        }
+        let k = Math.floor(Math.random() * n); // Randomly choose k
+        if (i === k) continue;  // Skip if i equals k
 
         let newRoute = twoOptSwap(currentRoute, i, k); // Perform 2-opt swap
-        if (calculateRouteLength(newRoute, distance_matrix) < calculateRouteLength(currentRoute, distance_matrix)) {
-            currentRoute = newRoute;
-            if (calculateRouteLength(currentRoute, distance_matrix) < calculateRouteLength(bestRoute, distance_matrix)) {
-                bestRoute = currentRoute; // Update best route
-                noImprovementCount = 0; // Reset count
-            }
-        } else {
-            noImprovementCount++; // Increment count if no improvement
+        let newLength = calculateRouteLength(newRoute, distance_matrix);
+        
+        if (newLength < bestLength) {
+            bestRoute = newRoute;
+            bestLength = newLength;  // Update best route and best length
         }
+
+        if (newLength < currentLength) {
+            currentRoute = newRoute;
+            currentLength = newLength;
+        }
+
+        iterations++;
     }
 
-    return calculateRouteLength(bestRoute, distance_matrix); // Return the length of the best route
+    return bestLength; // Return the length of the best route
 }
 
 // Function for swapping elements between i and k in reverse order
