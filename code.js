@@ -2,7 +2,7 @@ function tsp_ls(distance_matrix) {
     var n = distance_matrix.length;
 
     // Base case where there is only one or less than one city
-    if (n === 0 || !distance_matrix) {
+    if (n === 0) {
         return 0; 
     }
     if (n === 1) {
@@ -12,11 +12,10 @@ function tsp_ls(distance_matrix) {
         return 0; 
     }
 
-
-    let currentRoute = generateRandomRoute(distance_matrix); // Initialize with a random route
+    let currentRoute = generateRandomRoute(n); // Initialize with a random route
     let bestRoute = currentRoute; // Track the best route
 
-    // Stopping criterion where no improvement is seen for a set number of iterations
+    // Stopping criterion: no improvement for a set number of iterations
     let noImprovementCount = 0;
     const maxNoImprovement = 10; 
 
@@ -28,9 +27,9 @@ function tsp_ls(distance_matrix) {
         }
 
         let newRoute = twoOptSwap(currentRoute, i, k); // Perform 2-opt swap
-        if (calculateRouteLength(newRoute) < calculateRouteLength(currentRoute)) {
+        if (calculateRouteLength(newRoute, distance_matrix) < calculateRouteLength(currentRoute, distance_matrix)) {
             currentRoute = newRoute;
-            if (calculateRouteLength(currentRoute) < calculateRouteLength(bestRoute)) {
+            if (calculateRouteLength(currentRoute, distance_matrix) < calculateRouteLength(bestRoute, distance_matrix)) {
                 bestRoute = currentRoute; // Update best route
                 noImprovementCount = 0; // Reset count
             }
@@ -41,7 +40,6 @@ function tsp_ls(distance_matrix) {
 
     return calculateRouteLength(bestRoute, distance_matrix); // Return the length of the best route
 }
-
 
 // Function for swapping elements between i and k in reverse order
 function twoOptSwap(route, i, k) {
@@ -60,10 +58,10 @@ function calculateRouteLength(route, distance_matrix) {
     return length;
 }
 
-// Generates a random route
-function generateRandomRoute(distance_matrix) {
+// Generates a random route for the given number of cities
+function generateRandomRoute(n) {
     let route = [];
-    for (let i = 0; i < distance_matrix.length; i++) {
+    for (let i = 0; i < n; i++) {
         route.push(i);
     }
 
