@@ -8,38 +8,10 @@ function tsp_ls(distance_matrix) {
     if (n === 1) {
         return 0; 
     }
-
-    // Function for swapping elements between i and k in reverse order
-    function twoOptSwap(route, i, k) {
-        let newRoute = route.slice();
-        let temp = newRoute.slice(i, k + 1).reverse();
-        newRoute.splice(i, k - i + 1, ...temp);
-        return newRoute;
+    if (distance_matrix.every(row => row.every(val => val === 0))) {
+        return 0; 
     }
 
-    // Calculates the route length
-    function calculateRouteLength(route) {
-        let length = 0;
-        for (let i = 0; i < route.length - 1; i++) {
-            length += distance_matrix[route[i]][route[i + 1]];
-        }
-        return length;
-    }
-
-    // Generates a random route
-    function generateRandomRoute() {
-        let route = [];
-        for (let i = 0; i < n; i++) {
-            route.push(i);
-        }
-
-        // Shuffle the route randomly
-        for (let i = route.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [route[i], route[j]] = [route[j], route[i]];
-        }
-        return route;
-    }
 
     let currentRoute = generateRandomRoute(); // Initialize with a random route
     let bestRoute = currentRoute; // Track the best route
@@ -67,5 +39,38 @@ function tsp_ls(distance_matrix) {
         }
     }
 
-    return calculateRouteLength(bestRoute); // Return the length of the best route
+    return calculateRouteLength(bestRoute, distance_matrix); // Return the length of the best route
+}
+
+
+// Function for swapping elements between i and k in reverse order
+function twoOptSwap(route, i, k) {
+    let newRoute = route.slice();
+    let temp = newRoute.slice(i, k + 1).reverse();
+    newRoute.splice(i, k - i + 1, ...temp);
+    return newRoute;
+}
+
+// Calculates the route length
+function calculateRouteLength(route, distance_matrix) {
+    let length = 0;
+    for (let i = 0; i < route.length - 1; i++) {
+        length += distance_matrix[route[i]][route[i + 1]];
+    }
+    return length;
+}
+
+// Generates a random route
+function generateRandomRoute() {
+    let route = [];
+    for (let i = 0; i < n; i++) {
+        route.push(i);
+    }
+
+    // Shuffle the route randomly
+    for (let i = route.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [route[i], route[j]] = [route[j], route[i]];
+    }
+    return route;
 }
