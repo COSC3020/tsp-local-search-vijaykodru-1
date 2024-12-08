@@ -1,8 +1,12 @@
 function tsp_ls(distance_matrix) {
     //base case where there is only one or less than one city present, it returns 0
-    if (!distance_matrix || distance_matrix.length <= 1) {
-        return 0;
-      }
+    if (!distance_matrix || distance_matrix.length === 0) {
+        return 0; 
+    }
+    
+    if (distance_matrix.length === 1) {
+        return 0; 
+    }
 
     // function for swapping the elements between i and k in reverse order
     function twoOptSwap(route, i, k) {
