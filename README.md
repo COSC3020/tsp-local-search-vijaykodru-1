@@ -50,3 +50,10 @@ Test your new function; I've provided some basic testing code in `code.test.js`.
 What is the worst-case asymptotic time complexity of your implementation? What
 is the worst-case asymptotic memory complexity? Add your answer, including your
 reasoning, to this markdown file.
+
+
+#### Stoping Criterion:
+  The stopping criterion I choose is n * n where n is the number of cities in the given distance_matrix. This ensures that as the matrix gets bigger the stopping criterion is increased to find the best route. while going through the iterations the code checks if there is any improvment in the route found so far. If there is improvement it updates the best route and sets the current route to it. if no improvment found it only sets the new route to be current route and continues through the iterations
+
+#### Choosing i and k:
+  I choose to select i randomly between 0 and (distance_matrix.length - 1) and k is choosen randomly ensuring that it is greater than i so we dont end up making the same swapped list again.

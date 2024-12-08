@@ -16,9 +16,8 @@ function tsp_ls(distance_matrix) {
     
     // Stopping criterion: no improvement for a set number of iterations
     while (iterations < maxIterations) {
-        let i = Math.floor(Math.random() * n); // Randomly choose i
-        let k = Math.floor(Math.random() * n); // Randomly choose k
-        if (i === k) continue;  // Skip if i equals k
+        let i = Math.floor(Math.random() * (n - 1)); // Ensure i < n - 1
+        let k = Math.floor(Math.random() * (n - i - 1)) + i + 1; // Ensure k > i
 
         let newRoute = twoOptSwap(currentRoute, i, k); // Perform 2-opt swap
         let newLength = calculateRouteLength(newRoute, distance_matrix);
